@@ -1,19 +1,22 @@
 #!/usr/bin/python3
+"""
+    This module contains the canUnlockAll function.
+"""
 
 
 def canUnlockAll(boxes):
-    """Unlock array of boxes of keys with indices"""
-    size = len(boxes)
-    checker = {}
-    index = 0
+    """Method that determines if all the boxes can be opened
+        Arg:
+            boxes: Is a list of lists.
+    """
+    box = len(boxes) * [False]
+    box[0] = True
+    keys = [0]
 
-    for keys in boxes:
-        if len(keys) == 0 or index == 0:
-            checker[index] = -1  # -1 means box is empty
-        for key in keys:
-                if key < size and key != index:
-                    checker[key] = key
-        if len(checker) == size:
-            return True
-        index += 1
-    return False
+    for each in keys:
+        for i in boxes[each]:
+            if i not in keys:
+                if i < len(boxes):
+                    box[i] = True
+                    keys.append(i)
+    return all(box)
